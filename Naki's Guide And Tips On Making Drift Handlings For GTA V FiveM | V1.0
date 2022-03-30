@@ -1,0 +1,176 @@
+|------------------------------------------------------------------------|
+| Naki's Guide And Tips On Making Drift Handlings For GTA V/FiveM | V1.0 |
+|------------------------------------------------------------------------|
+
+List of Contents.
+
+1. - Understanding of Terms and Handling Creation
+	1.1 -- Introduction
+	1.2 -- Name Mixup Confusion
+	1.3 -- How to make a good base handling for drifting
+	1.4 -- Smoothing the handling
+	1.5 -- Troubleshooting
+2. - Tips
+
+3. - Change Log
+
+
+
+Part 1 - Understanding of Terms and Handling Creation
+
+
+1.1 -- Introduction
+
+Hello my name is Naki, this is my V1.0 of Handling Guide. What one should expect from this document? - "Look into the List of Contents" above. 
+Note: This "Guide" will be updated as needed. We will go through all of the features of the handling editor down below. 
+
+
+1.2 -- Name Mixup Confusion
+
+As the title says there are some names that should be cleared up, all the ones that are needed for drift handlings and related to it in any way will be listed below.
+
+Personal Presets - This contains your own presets.
+Server Presets - This contains presets the server is providing.
+
+fMass - Mass of the vehicle, as far as i know this only affects anything you hit and nothing else. As in for example anoter vehicle.
+fInitialDragCoeff - Drag of the vehicle.
+
+vecCentreOfMassOffset_x - Vehicle mass center point offset from side to side. (+right, -left)
+vecCentreOfMassOffset_y - Vehicle mass center point offset from front to back. (+front, -back)
+vecCentreOfMassOffset_z - Vehicle mass center point offset from top to bottom. (+up, -down)
+
+vecInertiaMultiplier_x - Inertia multiplier for left and right.
+vecInertiaMultiplier_y - Inertia multiplier for forward and back.
+vecInertiaMultiplier_z - Inertia multiplier for up and down.
+
+fDriveBiasFront - Value between 0-1 which determines vehicle's drive type, below 0.1 is rwd (rear wheel drive), 0.1 to below 0.6 is awd (all wheel drive), 0.6 or above is fwd (front wheel drive)
+nInitialDriveGears - How many gears vehicle has.
+fInitialDriveForce - Drive force of vehicle, imagine this as the power of your engine. Usual values around 0.2 to 0.5 about, for drifting you can use anywhere from 0.2 or even below to as high as you need it to be.
+
+fDriveInertia - How fast vehicle revs. below 1 slow, above and around 2.5 as fast as a motorbike.
+fClutchChangeRateScaleUpShift - Speed of shifting gears up. 1.5 slow, 3 fast
+fClutchChangeRateScaleDownShift - Speed of shifting gears down. 1.5 slow, 3 fast
+
+fInitialDriveMaxFlatVel - How fast you need to go for final gear to to engage, this will basicly change your gear ratio.
+
+fBrakeForce - Strength of brake.
+fBrakeBiasFront - Brake force ratio from front to back. below 0.5 is rear, above 0.5 is front.
+fHandBrakeForce - Strength of handbrake.
+
+fSteeringLock - How much your wheels turn when steering.
+
+fTractionCurveMax - How much grip you have when turning, this will also impact your turning speed when drifting.
+fTractionCurveMin - How much grip you have when accelerating, this will also impact your turning speed when drifting.
+fTractionCurveLateral - Maxium angle of vehicle until it starts losing power and spins out, imagine this as the max or preferred angle of drifting.
+fTractionSprintDeltaMax - How far off the ground vehicle has to be until it starts losing traction.
+fLowSpeedTractionLossMult - How much wheels lose traction when accelerating from stop.
+fCamberStiffnesss - When car is sideways and moving, if you let go of gas, this determines whether the car will over steer or under steer. (recommend leaving it as it is)
+fTractionBiasFront - Traction ratio from front to back. Below 0.5 more track on rear wheels, above 0.5 more traction on front wheels.
+fTractionLossMult - How much wheels lose traction when driving on lose surfaces like sand or dirt. (effects similar to fLowSpeedTractionLossMult above)
+
+fSuspensionForce - Strength of suspension.
+fSuspensionCompDamp - Strength of suspension compression damping.
+fSuspensionReboundDamp - Strength of suspension rebound damping.
+fSuspensionUpperLimit - How far vehicle can raise from the ground. (fSuspensionRaise acts as offset to this)
+fSuspensionLowerLimit - How low vehicle can be from the ground. (fSuspensionRaise acts as offset to this)
+fSuspensionRaise - Vehicle height offset from ground. (See fSuspensionUpper and Lower Limit above)
+fSuspensionBiasFront - Suspension strength ratio from front to back.
+
+fAntiRollBarForce - Body roll resist strength, the higher the number the less body roll vehicle will have. 
+fAntiRollBarBiasFront - Ratio of fAntiRollBarForce (above) from front to back.
+fRollBarCentreHeightFront - Body roll from left to right when accelerating.
+fRollBarCentreHeightRear - Body roll from front to back when accelerating.
+
+fDownforceModifier - Downforce multiplier.
+
+Reset - Resets handling back to vehicle's original one.
+
+
+1.3 -- How to make a good base handling for drifting
+
+Lets start with fDriveBiasFront, if you want your car to be awd set this between 0.1 to 0.6, if you want rwd put it below 0.1, preferably 0.
+
+Now we will give our car some power, change fInitialDriveForce to somewhere around 1.
+
+Change fInitialDriveMaxFlatVel to the top speed of your car, or preferred speed that you want to go. If you think your gears are going up too soon put the value higher, and if it's the other way around put it lower.
+
+Now to give more power to brakes.
+fBrakeForce to somewhere between 1 to 3.
+fHandBrakeForce to about the same as fBrakeForce but a bit higher.
+
+fSteeringLock to what you like, preferably around 35 to 52. 48 or 46 should be perfect.
+
+Now traction stuff.
+fTractionCurveMax to around 0.95 +- 0.5
+fTractionCurveMin to around 1.7 +- 0.5
+fTractionCurveLateral to the angle that you like to drift, for wide angle drifts even up to 50 to 60 is good, lower angle 35 to 40.
+fTractionBiasFront to around 0.48 +- 0.02
+
+This should be a good handling to start editing.
+
+
+1.4 -- Smoothing the handling
+
+Now to smooth out the handling.
+
+If you think your car is good enough but it goes too fast, increate fInitialDragCoeff by 0.5 until you find it good enough, try to stay below 10 if possible, 13 can lower your max speed all the way to 100 kmh.
+
+Again if your gears are not to your liking see (fInitialDriveMaxFlatVel)
+"Change fInitialDriveMaxFlatVel to the top speed of your car, or preferred speed that you want to go. If you think your gears are going up too soon put the value higher, and if it's the other way around put it lower."
+
+If your car doesn't want to turn try increasing fTractionCurveMax by 0.1 a bit, if it's not enough increase fDriveBiasFront by 0.01, if you want it to be rwd still don't go above 0.1. Another thing that can affect turning speed is fTractionCurveLateral. 
+If this is too high, your turning speed will be lowered. As last resort your can increase downforce by 1, this will make your car turn easier at higher speeds as well.
+
+Increase fDriveInertia if you want your car to rev faster.
+
+Increase both fClutchChangeRateScaleUpShift and DownShift if you want your shifting speeds to be faster.
+
+1.5 -- Troubleshooting
+
+First look into Smoothing the handling (1.4)
+
+In case you still have issues look down below.
+
+Issue 1 - Nearly impossible to start drifting.
+
+Some cars like the Scramjet don't want to drift at all. Only way around this that i found was to increase power a lot and lower traction, this ofc will make the car slide a lot more but there are no alternatives as of now.
+
+Issue 2 - Too much traction when turning.
+
+Lower fTractionCurveMax by 0.05 until it's good.
+
+If that didn't help, look to issue 1.
+
+Issue 3 - Weird suspension.
+
+If it is bumpy, for example a certain Nissan Silvia S13 has a suspension that just makes the car jump for any bump it hits. You can raise your car with fSuspensionRaise and lower fSuspensionForce.
+
+If it's not enough, then it's a no can do.
+
+Issue 4 - Drifting at high speeds impossible.
+
+Look for fDownforceModifier, if this is too high you won't be able to drift at high speeds.
+
+If solution above didn't help, mess around with traction.
+
+Issue 4 - Unlisted issue.
+
+Ask around and try random things that could be causing it.
+
+
+
+2. - Tips
+
+
+Not much here for now.
+
+If you want your car to drift and go fast, try increasing traction a little bit, power and add a tiny bit of downforce.
+
+If you want realistic drifting, try lowering power to somewhere around 0.4 to 0.7, Increase traction a little bit if needed, and if it's too much lower it obviously.
+
+
+
+3. - Change Log
+
+
+30.3.2022 - V1.0 Writing And Initial Release Date Of This document.
